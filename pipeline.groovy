@@ -38,12 +38,12 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'mernapp')]) {
+                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'password')]) {
                     script {
                         if (isUnix()) {
-                            sh 'docker login -u ndissanayake -p ${mernapp}'
+                            sh 'docker login -u ndissanayake -p ${password}'
                         } else {
-                            bat 'docker login -u ndissanayake -p ${mernapp}'
+                            bat 'docker login -u ndissanayake -p ${password}'
                         }
                     }
                 }
