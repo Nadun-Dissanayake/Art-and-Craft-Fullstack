@@ -49,7 +49,7 @@ export default function Footer(){
                     <div className='logo'>Finnier</div>
                 </div>
                 <div>
-                    <div className='coppy-right'>© Finnier International Ltd. 2023</div>
+                    <div className='coppy-right'>© Finnier International Ltd. 2024</div>
                 </div>
                 
                 <div className='social'><img src={tiktok}/></div>
