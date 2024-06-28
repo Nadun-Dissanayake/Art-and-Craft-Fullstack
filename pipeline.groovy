@@ -23,7 +23,7 @@ pipeline {
         stage('Verify Directory Structure') {
             steps {
                 script {
-                    def backendDir = new File("${WORKSPACE}/aoi")
+                    def backendDir = new File("${WORKSPACE}/api")
                     def frontendDir = new File("${WORKSPACE}/client")
                     
                     if (!backendDir.exists()) {
