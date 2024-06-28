@@ -34,15 +34,23 @@ pipeline {
             }
         }
 
-        stage('Push Docker Images') {
+        stage('Login to Docker Hub') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'docker-compose push'
-                    } else {
-                        bat 'docker-compose push'
+                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'mernapp')]) {
+                    script {
+                        bat "docker login -u ndissanayake -p ${mernapp}"
                     }
                 }
+            }
+        }
+        stage('Push Image Frontend') {
+            steps {
+                bat 'docker push ndissanayake/devops_frontend:latest'
+            }
+        }
+        stage('Push Image Backend') {
+            steps {
+                bat 'docker push ndissanayake/devops_backend:latest'
             }
         }
 
