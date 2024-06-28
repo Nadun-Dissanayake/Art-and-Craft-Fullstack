@@ -40,7 +40,11 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'mernapp')]) {
                     script {
-                        bat "docker login -u ndissanayake -p ${mernapp}"
+                        if (isUnix()) {
+                            sh "docker login -u ndissanayake -p ${mernapp}"
+                        } else {
+                            bat "docker login -u ndissanayake -p ${mernapp}"
+                        }
                     }
                 }
             }
@@ -48,33 +52,54 @@ pipeline {
 
         stage('Add tag to Image Frontend') {
             steps {
-                bat 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
+                if (isUnix()) {
+                    sh 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
+                } else {
+                    bat 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
+                }
             }
         }
 
         stage('Add tag to Image Backend') {
             steps {
-                bat 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
+                if (isUnix()) {
+                    sh 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
+                } else {
+                    bat 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
+                }
             }
         }
 
         stage('Push Image Frontend') {
             steps {
-                bat 'docker push ndissanayake/devops_frontend:latest'
+                if (isUnix()) {
+                    sh 'docker push ndissanayake/devops_frontend:latest'
+                } else {
+                    bat 'docker push ndissanayake/devops_frontend:latest'
+                }
             }
         }
 
         stage('Push Image Backend') {
             steps {
-                bat 'docker push ndissanayake/devops_backend:latest'
+                if (isUnix()) {
+                    sh 'docker push ndissanayake/devops_backend:latest'
+                } else {
+                    bat 'docker push ndissanayake/devops_backend:latest'
+                }
             }
         }
 
         stage('Deploy Application') {
             steps {
                 script {
-                    bat 'docker-compose down'
-                    bat 'docker-compose up -d'
+                    if (isUnix()) {
+                        sh 'docker-compose down'
+                        sh 'docker-compose up -d'
+                    } else {
+                        bat 'docker-compose down'
+                        bat 'docker-compose up -d'
+                    }
                 }
             }
         }
