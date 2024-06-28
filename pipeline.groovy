@@ -60,13 +60,13 @@ pipeline {
 
         stage('Push Image Frontend') {
             steps {
-                bat 'docker push ndissanayake/devops_frontend'
+                bat 'docker push ndissanayake/devops2_frontend:latest'
             }
         }
 
         stage('Push Image Backend') {
             steps {
-                bat 'ndissanayake/devops_backend'
+                bat 'ndissanayake/devops2_backend:latest'
             }
         }
 
