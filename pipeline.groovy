@@ -5,6 +5,12 @@ pipeline {
         githubPush()
     }
 
+    environment {
+        REPO_URL = 'https://github.com/Nadun-Dissanayake/Art-and-Craft-Fullstack.git'
+        BRANCH = 'main'
+        APP_NAME = 'Art and Craft Ecommerce Website'
+    }
+
   stages {
         stage('Clone Repository') {
             steps {
