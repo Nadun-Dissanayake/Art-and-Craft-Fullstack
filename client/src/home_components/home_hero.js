@@ -33,7 +33,7 @@ export default function Home_hero(){
         <section onSubmit={home}>
             <div className="home_hero">
                 <div className="discription">
-                    <h1>Find the modern creative <br/> Art and Craft Products</h1>
+                    <h1>Find the modern creative <br/> Art and Craft Products in Sri Lanka</h1>
                     <button>Join Now</button>
                 </div>
                 <div className="home_img" >
