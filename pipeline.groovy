@@ -36,24 +36,6 @@ pipeline {
             }
         }
 
-        stage('Tag Docker Images') {
-            steps {
-                script {
-                    if (isUnix()) {
-                        sh '''
-                        docker tag backend ${BACKEND_IMAGE}
-                        docker tag frontend ${FRONTEND_IMAGE}
-                        '''
-                    } else {
-                        bat '''
-                        docker tag backend ${BACKEND_IMAGE}
-                        docker tag frontend ${FRONTEND_IMAGE}
-                        '''
-                    }
-                }
-            }
-        }
-
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'mernapp')]) {
