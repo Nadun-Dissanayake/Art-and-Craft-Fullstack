@@ -40,27 +40,15 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh """
-                        docker tag devops_frontend:latest ${FRONTEND_IMAGE}
-                        docker tag devops_backend:latest ${BACKEND_IMAGE}
-                        """
+                        sh '''
+                        docker tag backend ${BACKEND_IMAGE}
+                        docker tag frontend ${FRONTEND_IMAGE}
+                        '''
                     } else {
-                        bat """
-                        docker tag devops_frontend:latest ${FRONTEND_IMAGE}
-                        docker tag devops_backend:latest ${BACKEND_IMAGE}
-                        """
-                    }
-                }
-            }
-        }
-
-        stage('Verify Docker Images') {
-            steps {
-                script {
-                    if (isUnix()) {
-                        sh 'docker images'
-                    } else {
-                        bat 'docker images'
+                        bat '''
+                        docker tag backend ${BACKEND_IMAGE}
+                        docker tag frontend ${FRONTEND_IMAGE}
+                        '''
                     }
                 }
             }
@@ -68,12 +56,12 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'DOCKER_HUB_PASSWORD')]) {
+                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'mernapp')]) {
                     script {
                         if (isUnix()) {
-                            sh 'echo $DOCKER_HUB_PASSWORD | docker login -u ndissanayake --password-stdin'
+                            sh 'docker login -u ndissanayake -p ${mernapp}'
                         } else {
-                            bat 'docker login -u ndissanayake -p %DOCKER_HUB_PASSWORD%'
+                            bat 'docker login -u ndissanayake -p ${mernapp}'
                         }
                     }
                 }
@@ -84,9 +72,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh "docker push ${FRONTEND_IMAGE}"
+                        sh 'docker push ${FRONTEND_IMAGE}'
                     } else {
-                        bat "docker push ${FRONTEND_IMAGE}"
+                        bat 'docker push ${FRONTEND_IMAGE}'
                     }
                 }
             }
@@ -96,9 +84,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh "docker push ${BACKEND_IMAGE}"
+                        sh 'docker push ${BACKEND_IMAGE}'
                     } else {
-                        bat "docker push ${BACKEND_IMAGE}"
+                        bat 'docker push ${BACKEND_IMAGE}'
                     }
                 }
             }
