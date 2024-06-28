@@ -46,6 +46,18 @@ pipeline {
             }
         }
 
+        stage('Add tag to Image Frontend') {
+            steps {
+                bat 'docker tag devops2-frontend:latest ndissanayake/devops_frontend:latest'
+            }
+        }
+
+        stage('Add tag to Image Backend') {
+            steps {
+                bat 'docker tag devops2-backend:latest ndissanayake/devops_backend:latest'
+            }
+        }
+
         stage('Push Image Frontend') {
             steps {
                 bat 'docker push ndissanayake/devops_frontend'
