@@ -1,8 +1,10 @@
 pipeline {
     agent any
-triggers{
-    githubPush()
-  }
+
+    triggers {
+        githubPush()
+    }
+
     environment {
         REPO_URL = 'https://github.com/Nadun-Dissanayake/Art-and-Craft-Fullstack.git'
         BRANCH = 'main'
@@ -43,6 +45,17 @@ triggers{
             }
         }
     }
+
+    post {
+        always {
+            script {
+                echo 'Cleaning up...'
+                if (isUnix()) {
+                    sh 'docker-compose down'
+                } else {
+                    bat 'docker-compose down'
+                }
+            }
+        }
+    }
 }
-
-
