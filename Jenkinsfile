@@ -73,17 +73,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            script {
-                echo 'Cleaning up...'
-                if (isUnix()) {
-                    sh 'docker-compose down'
-                } else {
-                    bat 'docker-compose down'
-                }
-            }
-        }
-    }
 }
