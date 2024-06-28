@@ -33,39 +33,67 @@
 # volumes:
 #   mongo-data:
 
+# version: '3.8'
+
+# services:
+#   api:
+#     image: mern_app_backend
+#     ports: 
+#       - '4000:4000'
+#     networks:
+#       - restaurant
+#     depends_on:
+#       - mongo
+
+#   client:
+#     image: mern_app
+#     stdin_open: true
+#     ports:
+#       - '3000:3000'
+#     networks:
+#       - restaurant
+
+#   mongo:
+#     image: mongo:latest
+#     ports:
+#       - '27017:27017'
+#     networks:
+#       - restaurant
+#     volumes:
+#       - mongo-data:/data/db
+    
+# networks:
+#   restaurant:
+#     driver: bridge
+
+# volumes:
+#   mongo-data:
+#     driver: local
+
 version: '3.8'
 
 services:
-  api:
-    image: mern_app_backend
-    ports: 
-      - '4000:4000'
-    networks:
-      - restaurant
+  backend:
+    build: ./aoi
+    container_name: backend
+    ports:
+      - "5555:5555"
     depends_on:
       - mongo
 
-  client:
-    image: mern_app
-    stdin_open: true
+  frontend:
+    build: ./client
+    container_name: frontend
     ports:
-      - '3000:3000'
-    networks:
-      - restaurant
+      - "3000:3000"
+    depends_on:
+      - backend
 
   mongo:
     image: mongo:latest
     ports:
       - '27017:27017'
-    networks:
-      - restaurant
-    volumes:
-      - mongo-data:/data/db
-    
-networks:
-  restaurant:
-    driver: bridge
 
 volumes:
   mongo-data:
-    driver: local
+      driver: local
