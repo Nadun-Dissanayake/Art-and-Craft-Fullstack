@@ -1,0 +1,71 @@
+# version: '3.8'
+
+# services:
+#   api:
+#     build: ./api
+#     container_name: api_container
+#     ports:
+#       - '8000:8000'
+#     volumes:
+#       - ./api:/app
+#       - /app/node_modules
+#     depends_on:
+#       - mongo
+
+#   client:
+#     build: ./client
+#     container_name: client_container
+#     ports:
+#       - '3000:3000'
+#     volumes:
+#       - ./client:/app
+#       - /app/node_modules
+#     stdin_open: true
+#     tty: true
+
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongo_container
+#     restart: always
+#     volumes:
+#       - mongo-data:/data/db
+    
+# volumes:
+#   mongo-data:
+
+version: '3.8'
+
+services:
+  api:
+    image: mern_app_backend
+    ports: 
+      - '4000:4000'
+    networks:
+      - restaurant
+    depends_on:
+      - mongo
+
+  client:
+    image: mern_app
+    stdin_open: true
+    ports:
+      - '3000:3000'
+    networks:
+      - restaurant
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    networks:
+      - restaurant
+    volumes:
+      - mongo-data:/data/db
+    
+networks:
+  restaurant:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
