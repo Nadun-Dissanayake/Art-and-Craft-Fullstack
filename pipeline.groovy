@@ -48,25 +48,13 @@ pipeline {
 
         stage('Push Image Frontend') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'docker push ${FRONTEND_IMAGE}'
-                    } else {
-                        bat 'docker push ${FRONTEND_IMAGE}'
-                    }
-                }
+                bat 'docker push ndissanayake/devops_frontend'
             }
         }
 
         stage('Push Image Backend') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'docker push ${BACKEND_IMAGE}'
-                    } else {
-                        bat 'docker push ${BACKEND_IMAGE}'
-                    }
-                }
+                bat 'ndissanayake/devops_backend'
             }
         }
 
