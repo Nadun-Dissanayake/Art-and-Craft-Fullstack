@@ -8,9 +8,31 @@ pipeline {
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
         stage('Clone Repository') {
             steps {
                 git branch: "${BRANCH}", url: "${REPO_URL}"
+            }
+        }
+
+        stage('Verify Directory Structure') {
+            steps {
+                script {
+                    def backendDir = new File("${WORKSPACE}/aoi")
+                    def frontendDir = new File("${WORKSPACE}/client")
+                    
+                    if (!backendDir.exists()) {
+                        error "Directory 'aoi' not found!"
+                    }
+                    if (!frontendDir.exists()) {
+                        error "Directory 'client' not found!"
+                    }
+                }
             }
         }
 
