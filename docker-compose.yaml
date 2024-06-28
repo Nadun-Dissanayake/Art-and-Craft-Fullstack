@@ -74,10 +74,10 @@ version: '3.8'
 
 services:
   backend:
-    build: ./aoi
+    build: ./api
     container_name: backend
     ports:
-      - "5555:5555"
+      - "4000:4000"
     depends_on:
       - mongo
 
