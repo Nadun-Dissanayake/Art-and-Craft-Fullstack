@@ -27,16 +27,17 @@ pipeline {
                 script {
                     def backendDir = new File("${WORKSPACE}/api")
                     def frontendDir = new File("${WORKSPACE}/client")
-                    
+        
                     if (!backendDir.exists()) {
-                        error "Directory 'aoi' not found!"
+                        error "Directory 'api' not found at ${backendDir.absolutePath}!"
                     }
                     if (!frontendDir.exists()) {
-                        error "Directory 'client' not found!"
+                        error "Directory 'client' not found at ${frontendDir.absolutePath}!"
                     }
                 }
             }
         }
+
 
         stage('Build Docker Images') {
             steps {
