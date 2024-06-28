@@ -52,40 +52,48 @@ pipeline {
 
         stage('Add tag to Image Frontend') {
             steps {
-                if (isUnix()) {
-                    sh 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
-                } else {
-                    bat 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
+                script {
+                    if (isUnix()) {
+                        sh 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
+                    } else {
+                        bat 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
+                    }
                 }
             }
         }
 
         stage('Add tag to Image Backend') {
             steps {
-                if (isUnix()) {
-                    sh 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
-                } else {
-                    bat 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
+                script {
+                    if (isUnix()) {
+                        sh 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
+                    } else {
+                        bat 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
+                    }
                 }
             }
         }
 
         stage('Push Image Frontend') {
             steps {
-                if (isUnix()) {
-                    sh 'docker push ndissanayake/devops_frontend:latest'
-                } else {
-                    bat 'docker push ndissanayake/devops_frontend:latest'
+                script {
+                    if (isUnix()) {
+                        sh 'docker push ndissanayake/devops_frontend:latest'
+                    } else {
+                        bat 'docker push ndissanayake/devops_frontend:latest'
+                    }
                 }
             }
         }
 
         stage('Push Image Backend') {
             steps {
-                if (isUnix()) {
-                    sh 'docker push ndissanayake/devops_backend:latest'
-                } else {
-                    bat 'docker push ndissanayake/devops_backend:latest'
+                script {
+                    if (isUnix()) {
+                        sh 'docker push ndissanayake/devops_backend:latest'
+                    } else {
+                        bat 'docker push ndissanayake/devops_backend:latest'
+                    }
                 }
             }
         }
