@@ -54,9 +54,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'docker tag devops_frontend:latest ndissanayake/devops_frontend:latest'
+                        sh 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
                     } else {
-                        bat 'docker tag devops_frontend:latest ndissanayake/devops_frontend:latest'
+                        bat 'docker tag devops-frontend:latest ndissanayake/devops_frontend:latest'
                     }
                 }
             }
@@ -66,9 +66,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'docker tag devops_backend:latest ndissanayake/devops_backend:latest'
+                        sh 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
                     } else {
-                        bat 'docker tag devops_backend:latest ndissanayake/devops_backend:latest'
+                        bat 'docker tag devops-backend:latest ndissanayake/devops_backend:latest'
                     }
                 }
             }
