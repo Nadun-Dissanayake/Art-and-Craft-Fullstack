@@ -75,7 +75,7 @@ version: '3.8'
 services:
   backend:
     build: ./api
-    container_name: backend
+    container_name: backend:latest
     ports:
       - "4000:4000"
     depends_on:
@@ -83,7 +83,7 @@ services:
 
   frontend:
     build: ./client
-    container_name: frontend
+    container_name: frontend:latest
     ports:
       - "3000:3000"
     depends_on:
