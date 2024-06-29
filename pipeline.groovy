@@ -38,7 +38,7 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'mernapp')]) {
+                withCredentials([string(credentialsId: 'new_docker_hub', variable: 'mernapp')]) {
                     script {
                         if (isUnix()) {
                             sh "docker login -u ndissanayake -p ${mernapp}"
