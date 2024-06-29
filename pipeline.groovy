@@ -29,9 +29,9 @@ pipeline {
                 withCredentials([string(credentialsId: 'new_docker_hub', variable: 'DOCKER_PASSWORD')]) {
                     script {
                         if (isUnix()) {
-                            sh 'echo $DOCKER_PASSWORD | docker login -u ndissanayake --password-stdin'
+                            sh "docker login -u ndissanayake -p ${DOCKER_PASSWORD}"
                         } else {
-                            bat 'echo %DOCKER_PASSWORD% | docker login -u ndissanayake --password-stdin'
+                            bat "docker login -u ndissanayake -p ${DOCKER_PASSWORD}"
                         }
                     }
                 }
