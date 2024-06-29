@@ -41,7 +41,7 @@ export default function Header(){
 
     return(
         <header>
-        <Link to='/' className="logo">Finnier Hub</Link>
+        <Link to='/' className="logo">Finnier</Link>
         <nav>
           {username && (
             <>
