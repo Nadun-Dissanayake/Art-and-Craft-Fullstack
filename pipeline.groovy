@@ -24,26 +24,28 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Login to Docker Hub') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'docker-compose build'
-                    } else {
-                        bat 'docker-compose build'
+                withCredentials([string(credentialsId: 'new_docker_hub', variable: 'DOCKER_PASSWORD')]) {
+                    script {
+                        if (isUnix()) {
+                            sh 'echo $DOCKER_PASSWORD | docker login -u ndissanayake --password-stdin'
+                        } else {
+                            bat 'echo %DOCKER_PASSWORD% | docker login -u ndissanayake --password-stdin'
+                        }
                     }
                 }
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Build Docker Images') {
             steps {
-                withCredentials([string(credentialsId: 'new_docker_hub', variable: 'mernapp')]) {
-                    script {
+                script {
+                    retry(3) {
                         if (isUnix()) {
-                            sh "docker login -u ndissanayake -p ${mernapp}"
+                            sh 'docker-compose build'
                         } else {
-                            bat "docker login -u ndissanayake -p ${mernapp}"
+                            bat 'docker-compose build'
                         }
                     }
                 }
