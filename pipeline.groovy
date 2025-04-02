@@ -26,12 +26,12 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'docker-pass')]) {
+                withCredentials([string(credentialsId: 'duckerhubpassword', variable: 'DOCKERHUB_PASS')]) {
                     script {
                         if (isUnix()) {
-                            sh "docker login -u ndissanayake -p ${docker-pass}"
+                            sh "docker login -u ndissanayake -p ${DOCKERHUB_PASS}"
                         } else {
-                            bat "docker login -u ndissanayake -p ${docker-pass}"
+                            bat "docker login -u ndissanayake -p ${DOCKERHUB_PASS}"
                         }
                     }
                 }
