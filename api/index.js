@@ -29,7 +29,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // Environment Variables
 const PORT = 4000;
-const DB_URL= "mongodb+srv://blog:mern-blog@cluster0.zuuhrac.mongodb.net/?retryWrites=true&w=majority" || "mongodb://mongo:27017/blogDB"
+const DB_URL= "mongodb+srv://twg:Cwh6LLh0uVFgSCm5@mernapp.zejrzu4.mongodb.net/?retryWrites=true&w=majority&appName=mernApp" || "mongodb://mongo:27017/blogDB"
 
 
 // Connect to MongoDB
